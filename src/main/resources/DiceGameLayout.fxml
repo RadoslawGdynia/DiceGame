@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.05157593123209169" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="598.0">
+         <children>
+            <MenuBar prefHeight="100.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <SplitPane dividerPositions="0.5" layoutY="-31.0" orientation="VERTICAL" prefHeight="619.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="Player 1" />
+                        <TilePane layoutX="48.0" layoutY="123.0" prefHeight="80.0" prefRows="1" prefTileHeight="80.0" prefTileWidth="80.0" prefWidth="900.0" />
+                        <CheckBox layoutX="126.0" layoutY="250.0" mnemonicParsing="false" text="Dice 1" />
+                        <CheckBox layoutX="306.0" layoutY="250.0" mnemonicParsing="false" text="Dice 2" />
+                        <CheckBox layoutX="486.0" layoutY="250.0" mnemonicParsing="false" text="Dice 3" />
+                        <CheckBox layoutX="666.0" layoutY="250.0" mnemonicParsing="false" text="Dice 4" />
+                        <CheckBox layoutX="846.0" layoutY="250.0" mnemonicParsing="false" text="Dice 5" />
+                        <Label fx:id="p1ComandLabel" layoutX="14.0" layoutY="51.0" prefHeight="49.0" prefWidth="959.0" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" prefHeight="20.0" prefWidth="115.0" text="Player 2" />
+                        <TilePane layoutX="37.0" layoutY="123.0" prefHeight="80.0" prefRows="1" prefTileHeight="80.0" prefTileWidth="80.0" prefWidth="900.0" />
+                        <CheckBox layoutX="126.0" layoutY="250.0" mnemonicParsing="false" text="Dice 1" />
+                        <CheckBox layoutX="306.0" layoutY="250.0" mnemonicParsing="false" text="Dice 2" />
+                        <CheckBox layoutX="486.0" layoutY="250.0" mnemonicParsing="false" text="Dice 3" />
+                        <CheckBox layoutX="666.0" layoutY="250.0" mnemonicParsing="false" text="Dice 4" />
+                        <CheckBox layoutX="846.0" layoutY="249.0" mnemonicParsing="false" text="Dice 5" />
+                        <Label fx:id="p2ComandLabel" layoutX="37.0" layoutY="50.0" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
