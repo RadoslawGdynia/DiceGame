@@ -13,7 +13,6 @@ import java.util.List;
 
 public class Main extends Application {
     private static List<Player> players;
-    private int round = 1;
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -11,7 +11,6 @@ public abstract class Player {
     private final List<Integer> result;
     private int rank;
     private Configuration figure;
-    private int roundNumber=1;
 
     public Player(String name) {
         this.PLAYER_NAME = name;
@@ -42,6 +41,7 @@ public abstract class Player {
 
     public void setFigure(Configuration figure) {
         this.figure = figure;
+        this.rank = figure.setRank();
     }
     public void initialThrow(){
 

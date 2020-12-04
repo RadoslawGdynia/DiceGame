@@ -10,7 +10,6 @@ public class DiceEvaluation {
     }
     public static Configuration evaluate(List<Integer> results){
         List<Integer> resultData = configurationEvaluation(results);
-        System.out.println("result data: " + resultData.toString());
         List<Integer> weightedResults = new ArrayList<>(resultData);
         weightedResults.sort(Integer::compareTo);
         Collections.reverse(weightedResults);

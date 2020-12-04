@@ -32,6 +32,7 @@
                         <CheckBox layoutX="846.0" layoutY="250.0" mnemonicParsing="false" text="Dice 5" />
                         <Label fx:id="p1CommandLabel" layoutX="243.0" layoutY="60.0" prefHeight="46.0" prefWidth="705.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0" />
                         <Button fx:id="play1Button" layoutX="14.0" layoutY="60.0" mnemonicParsing="false" onAction="#handlePlay1Button" prefHeight="46.0" prefWidth="181.0" text="PLAY!" />
+                        <Label fx:id="result1Label" layoutX="195.0" layoutY="22.0" prefHeight="17.0" prefWidth="454.0" text="Label" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
@@ -45,6 +46,7 @@
                         <CheckBox layoutX="846.0" layoutY="249.0" mnemonicParsing="false" text="Dice 5" />
                         <Label fx:id="p2CommandLabel" layoutX="270.0" layoutY="57.0" prefHeight="45.0" prefWidth="705.0" AnchorPane.bottomAnchor="223.0" AnchorPane.leftAnchor="270.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="57.0" />
                         <Button fx:id="play2Button" layoutX="14.0" layoutY="56.0" mnemonicParsing="false" onAction="#handlePlay2Button" prefHeight="46.0" prefWidth="181.0" text="PLAY!" />
+                        <Label fx:id="result2Label" layoutX="195.0" layoutY="16.0" prefHeight="17.0" prefWidth="454.0" text="Label" />
                      </children>
                   </AnchorPane>
               </items>
