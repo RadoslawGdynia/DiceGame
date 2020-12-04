@@ -1,19 +1,11 @@
 package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations;
 
-import java.util.ArrayList;
-
 public class Yahtzee implements Configuration {
     private final String NAME = "YAHTZEE";
     @Override
     public int setRank() {
-        return 0;
+        return 100;
     }
-
-    @Override
-    public boolean checkForPresence(ArrayList<Integer> results) {
-        return false;
-    }
-
     @Override
     public String returnName() {
         return NAME;

@@ -1,21 +1,15 @@
 package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations;
 
-import java.util.ArrayList;
-
 public class Pair implements Configuration {
     private final String NAME = "Pair";
+    private int weight;
+
     @Override
     public int setRank() {
-        return 0;
+        return weight;
     }
-
     @Override
     public String returnName() {
         return NAME;
-    }
-
-    @Override
-    public boolean checkForPresence(ArrayList<Integer> results) {
-        return false;
     }
 }

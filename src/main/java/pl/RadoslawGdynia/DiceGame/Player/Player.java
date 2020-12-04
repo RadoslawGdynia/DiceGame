@@ -2,17 +2,20 @@ package pl.RadoslawGdynia.DiceGame.Player;
 
 import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Player {
+public abstract class Player {
     public final String PLAYER_NAME;
     private final List<Integer> result;
     private int rank;
     private Configuration figure;
+    private int roundNumber=1;
 
-    public Player(String name, List<Integer> result) {
+    public Player(String name) {
         this.PLAYER_NAME = name;
-        this.result = result;
+        this.result = new ArrayList<>();
         this.rank = 0;
         this.figure = null;
     }
@@ -40,4 +43,16 @@ public class Player {
     public void setFigure(Configuration figure) {
         this.figure = figure;
     }
+    public void initialThrow(){
+
+        for(int i =0; i<5; i++){
+            result.add(throwDice());
+        }
+    }
+
+    public int throwDice(){
+        Random random = new Random();
+        return random.nextInt(5) + 1;
+    }
+    abstract void decision();
 }

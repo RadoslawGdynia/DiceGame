@@ -1,12 +1,12 @@
 package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations;
 
-public class Tripple implements Configuration {
-    private final String NAME = "Three Of A Kind";
-    private int weight;
+public class Nothing implements Configuration {
+    private static final String NAME = "Nothing";
     @Override
     public int setRank() {
-        return 20+weight;
+        return 0;
     }
+
     @Override
     public String returnName() {
         return NAME;

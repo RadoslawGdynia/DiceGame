@@ -1,0 +1,17 @@
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\LargeStraight.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\ResultEvaluation.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\SmallStraight.class
+pl\RadoslawGdynia\DiceGame\Player\Player.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Configuration.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Yahtzee.class
+pl\RadoslawGdynia\DiceGame\DiceTile\DiceTile.class
+module-info.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\FullHouse.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\TwoPairs.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\DiceEvaluation.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Tripple.class
+pl\RadoslawGdynia\DiceGame\Main\Main.class
+pl\RadoslawGdynia\DiceGame\Main\DiceGameLayoutController.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Quadruple.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Nothing.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Pair.class
