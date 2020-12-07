@@ -13,11 +13,9 @@ import org.slf4j.LoggerFactory;
 public class DiceTile extends StackPane {
     public static final Logger log = LoggerFactory.getLogger(DiceTile.class);
     private final Pane root;
-    private final int ID;
 
-    public DiceTile(Pane tPane, int id, int value) {
+    public DiceTile(Pane tPane, int value) {
 
-        this.ID = id;
         this.root = tPane;
         tPane.getChildren().add(this);
         Rectangle border = new Rectangle(80, 80);

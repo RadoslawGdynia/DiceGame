@@ -6,7 +6,7 @@ public class Pair implements Configuration {
 
     @Override
     public int setRank() {
-        return weight;
+        return 6;
     }
     @Override
     public String returnName() {

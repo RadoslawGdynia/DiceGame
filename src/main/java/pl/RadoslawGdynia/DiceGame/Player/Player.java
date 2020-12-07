@@ -54,5 +54,5 @@ public abstract class Player {
         Random random = new Random();
         return random.nextInt(5) + 1;
     }
-    abstract void decision();
+    abstract void decision(List<Integer> list);
 }

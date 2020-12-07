@@ -5,7 +5,7 @@ public class TwoPairs implements Configuration {
     private int weight;
     @Override
     public int setRank() {
-        return weight;
+        return 12;
     }
 
     @Override
