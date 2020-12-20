@@ -4,6 +4,7 @@ pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\SmallStraight
 pl\RadoslawGdynia\DiceGame\Player\Player.class
 pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Configuration.class
 pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Yahtzee.class
+pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceEvaluation.class
 pl\RadoslawGdynia\DiceGame\Controllers\DiceGameLayoutController.class
 pl\RadoslawGdynia\DiceGame\DiceTile\DiceTile.class
 pl\RadoslawGdynia\DiceGame\Player\HumanPlayer.class
@@ -11,7 +12,6 @@ pl\RadoslawGdynia\DiceGame\Controllers\StartGameController.class
 module-info.class
 pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\FullHouse.class
 pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\TwoPairs.class
-pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\DiceEvaluation.class
 pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Tripple.class
 pl\RadoslawGdynia\DiceGame\Main\Main.class
 pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\Quadruple.class

@@ -7,10 +7,9 @@ import javafx.scene.layout.TilePane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.RadoslawGdynia.DiceGame.DiceTile.DiceTile;
-import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.DiceEvaluation;
+import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceEvaluation;
 import pl.RadoslawGdynia.DiceGame.Main.Main;
 import pl.RadoslawGdynia.DiceGame.Player.ComputerPlayer;
-import pl.RadoslawGdynia.DiceGame.Player.HumanPlayer;
 import pl.RadoslawGdynia.DiceGame.Player.Player;
 
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ import java.util.Optional;
 
 public class DiceGameLayoutController {
     public static final Logger log = LoggerFactory.getLogger(DiceGameLayoutController.class);
+    private static DiceGameLayoutController instance = new DiceGameLayoutController();
     @FXML
     private Label p1CommandLabel;
     @FXML
@@ -74,6 +74,10 @@ public class DiceGameLayoutController {
     private final Player player1 = Main.getPlayers().get(0);
     private final Player player2 = Main.getPlayers().get(1);
 
+    public static DiceGameLayoutController getInstance(){
+        return instance;
+    }
+
     public void initialize() {
         p1Label.setText(player1.getPLAYER_NAME());
         p2Label.setText(player2.getPLAYER_NAME());
@@ -102,39 +106,49 @@ public class DiceGameLayoutController {
     }
 
     public void handlePlayButton() {
-        round++;
-        if (round <3) {
-            activePlayer.initialThrow();
-            generateDices(activePlayer.getResult());
-            configureResultLabel();
-            changeActivePlayer();
-            if (player2 instanceof ComputerPlayer) {
-                handlePlayButton();
 
+        if (round < 2) {
+            firstRound();
+            if (player2 instanceof ComputerPlayer)  {
+                round++;
+                firstRound();
             }
         } else {
             List<Integer> list = getDicesToReRoll(activeCheckBoxes);
-            if (activePlayer instanceof HumanPlayer) {
-                if (list.isEmpty()) {
-                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setHeaderText("You decided not to re-roll any dices.");
-                    alert.setContentText("If you want to proceed press OK, if you would like to select dices to re-roll press CANCEL");
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.isPresent() && result.get() != ButtonType.OK) {
-                        ((HumanPlayer) activePlayer).decision(list);
-                        changeActivePlayer();
-                    } else {
-                        return;
-                    }
+            if (list.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("You decided not to re-roll any dices.");
+                alert.setContentText("If you want to proceed press OK, if you would like to select dices to re-roll press CANCEL");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() != ButtonType.OK) {
+                    activePlayer.decision(list);
                 } else {
-                    ((HumanPlayer) activePlayer).decision(list);
-                    generateDices(activePlayer.getResult());
-                    configureResultLabel();
-                    changeActivePlayer();
+                    return;
                 }
-
+            } else {
+                activePlayer.decision(list);
+                generateDices(activePlayer.getResult());
+                configureResultLabel();
             }
+            changeActivePlayer();
+            if(activePlayer instanceof ComputerPlayer) {
+                activePlayer.decision(list);
+                changeActivePlayer();
+                round++;
+            }
+
         }
+        round++;
+        if (round==4) {
+            Main.finalResults();
+        }
+    }
+
+    private void firstRound() {
+        activePlayer.initialThrow();
+        generateDices(activePlayer.getResult());
+        configureResultLabel();
+        changeActivePlayer();
     }
 
     private void generateDices(List<Integer> results) {
@@ -180,7 +194,8 @@ public class DiceGameLayoutController {
         }
         return indexesToReRoll;
     }
-    private void configureResultLabel(){
+
+    private void configureResultLabel() {
         activePlayer.setFigure(DiceEvaluation.evaluate(activePlayer.getResult()));
         activeResultLabel.setText("RESULTS:\t\tFigure you have: " + activePlayer.getFigure().returnName() + ";\t which gives you points: " + activePlayer.getRank());
     }

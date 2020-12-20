@@ -1,8 +1,12 @@
-package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations;
+package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms;
+
+import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DiceEvaluation {
 
@@ -38,15 +42,14 @@ public class DiceEvaluation {
         return new Nothing();
     }
 
-    private static List<Integer> configurationEvaluation(List<Integer> results){
-        results.sort(Integer::compareTo);
-        Collections.reverse(results);
+    protected static List<Integer> configurationEvaluation(List<Integer> results){
+        List<Integer> toEvaluate = results.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         List<Integer> configuration = new ArrayList<>();
         for (int i =0; i<6; i++){
             configuration.add(0);
         }
         int index = 0;
-        for(Integer dice : results){
+        for(Integer dice : toEvaluate){
             for(int i = 6; i>0; i--){
                 if(dice==i) configuration.set(index, configuration.get(index)+1);
                 else index++;
@@ -54,5 +57,9 @@ public class DiceEvaluation {
             index = 0;
         }
         return configuration;
+    }
+    public static void showDice(List<Integer> dice) {
+        for(Integer i : dice) System.out.print(i+ ", ");
+        System.out.println();
     }
 }

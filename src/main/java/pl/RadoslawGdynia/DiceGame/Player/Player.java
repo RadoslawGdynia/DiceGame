@@ -1,6 +1,7 @@
 package pl.RadoslawGdynia.DiceGame.Player;
 
 import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.Configuration;
+import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceEvaluation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +49,13 @@ public abstract class Player {
         for(int i =0; i<5; i++){
             result.add(throwDice());
         }
+        System.out.println("Player " + this.PLAYER_NAME + " initial throw is: ");
+        DiceEvaluation.showDice(this.getResult());
     }
 
     public int throwDice(){
         Random random = new Random();
         return random.nextInt(5) + 1;
     }
-    abstract void decision(List<Integer> list);
+    abstract public void decision(List<Integer> list);
 }
