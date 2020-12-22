@@ -120,7 +120,7 @@ public class DiceGameLayoutController {
                 alert.setHeaderText("You decided not to re-roll any dices.");
                 alert.setContentText("If you want to proceed press OK, if you would like to select dices to re-roll press CANCEL");
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() != ButtonType.OK) {
+                if (result.isPresent() && result.get() == ButtonType.OK) {
                     activePlayer.decision(list);
                 } else {
                     return;

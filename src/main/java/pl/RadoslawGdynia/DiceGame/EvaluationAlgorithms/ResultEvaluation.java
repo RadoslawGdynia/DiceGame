@@ -1,10 +1,13 @@
 package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms;
 
+import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.*;
 import pl.RadoslawGdynia.DiceGame.Main.Main;
 import pl.RadoslawGdynia.DiceGame.Player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ResultEvaluation {
 
@@ -17,12 +20,16 @@ public class ResultEvaluation {
         if(computer.getRank()>humanPlayerRank) return null;
         else {
             List<Integer> computerSorted = DiceEvaluation.configurationEvaluation(computerDices);
-
             int highestMultiple = computerSorted.get(0);
-            switch(highestMultiple){
-                default:
-                    for(int i =0; i<5; i++) indexesToReRoll.add(i);
-            }
+            Map<Integer, Configuration> possibleConfigurations = new TreeMap<>();
+            possibleConfigurations.put(10, new Pair());
+            possibleConfigurations.put(20, new TwoPairs());
+            possibleConfigurations.put(35, new Triple());
+            possibleConfigurations.put(45, new SmallStraight());
+            possibleConfigurations.put(55, new LargeStraight());
+            possibleConfigurations.put(60, new FullHouse());
+            possibleConfigurations.put(90, new Quadruple());
+            possibleConfigurations.put(120, new Yahtzee());
         }
         return indexesToReRoll;
     }

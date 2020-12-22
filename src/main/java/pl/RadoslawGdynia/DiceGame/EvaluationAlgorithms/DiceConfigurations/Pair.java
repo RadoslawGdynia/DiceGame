@@ -2,11 +2,19 @@ package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations;
 
 public class Pair implements Configuration {
     private final String NAME = "Pair";
-    private int weight;
+    public static final int BASE_VALUE = 10;
+    private int finalValue;
+
+    public Pair(int modifier) {
+        this.finalValue = BASE_VALUE+modifier;
+    }
+
+    public Pair() {
+    }
 
     @Override
     public int setRank() {
-        return 6;
+        return finalValue;
     }
     @Override
     public String returnName() {
