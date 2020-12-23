@@ -1,7 +1,6 @@
 package pl.RadoslawGdynia.DiceGame.Player;
 
 import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.Configuration;
-import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceEvaluation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +44,9 @@ public abstract class Player {
         this.rank = figure.setRank();
     }
     public void initialThrow(){
-
         for(int i =0; i<5; i++){
             result.add(throwDice());
         }
-        System.out.println("Player " + this.PLAYER_NAME + " initial throw is: ");
-        DiceEvaluation.showDice(this.getResult());
     }
 
     public int throwDice(){

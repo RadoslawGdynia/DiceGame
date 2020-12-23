@@ -18,7 +18,6 @@ import java.util.Optional;
 
 public class DiceGameLayoutController {
     public static final Logger log = LoggerFactory.getLogger(DiceGameLayoutController.class);
-    private static DiceGameLayoutController instance = new DiceGameLayoutController();
     @FXML
     private Label p1CommandLabel;
     @FXML
@@ -74,10 +73,6 @@ public class DiceGameLayoutController {
     private final Player player1 = Main.getPlayers().get(0);
     private final Player player2 = Main.getPlayers().get(1);
 
-    public static DiceGameLayoutController getInstance(){
-        return instance;
-    }
-
     public void initialize() {
         p1Label.setText(player1.getPLAYER_NAME());
         p2Label.setText(player2.getPLAYER_NAME());
@@ -118,7 +113,7 @@ public class DiceGameLayoutController {
             if (list.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setHeaderText("You decided not to re-roll any dices.");
-                alert.setContentText("If you want to proceed press OK, if you would like to select dices to re-roll press CANCEL");
+                alert.setContentText("If you want to proceed press OK,\n if you would like to select dices to re-roll press CANCEL");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK) {
                     activePlayer.decision(list);
@@ -133,6 +128,8 @@ public class DiceGameLayoutController {
             changeActivePlayer();
             if(activePlayer instanceof ComputerPlayer) {
                 activePlayer.decision(list);
+                generateDices(activePlayer.getResult());
+                configureResultLabel();
                 changeActivePlayer();
                 round++;
             }

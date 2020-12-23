@@ -1,6 +1,8 @@
 package pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms;
 
 import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.*;
+import pl.RadoslawGdynia.DiceGame.Main.Main;
+import pl.RadoslawGdynia.DiceGame.Player.Player;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -51,7 +53,7 @@ public class DiceEvaluation {
         }
     }
 
-    protected static List<Integer> configurationEvaluation(List<Integer> results) {
+    public static List<Integer> configurationEvaluation(List<Integer> results) {
         List<Integer> toEvaluate = results.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         List<Integer> configuration = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
@@ -67,9 +69,10 @@ public class DiceEvaluation {
         }
         return configuration;
     }
-
-    public static void showDice(List<Integer> dice) {
-        for (Integer i : dice) System.out.print(i + ", ");
-        System.out.println();
+    public static String finalResult(){
+        Player p1 = Main.getPlayers().get(0);
+        Player p2 = Main.getPlayers().get(1);
+        if(p1.getRank()==p2.getRank()) return "both of you. However unlikely it was a draw!";
+        return (p1.getRank()>p2.getRank())? p1.getPLAYER_NAME() : p2.getPLAYER_NAME();
     }
 }
