@@ -48,7 +48,6 @@ public abstract class Player {
             result.add(throwDice());
         }
     }
-
     public int throwDice(){
         Random random = new Random();
         return random.nextInt(5) + 1;

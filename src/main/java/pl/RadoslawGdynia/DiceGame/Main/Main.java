@@ -22,11 +22,13 @@ import java.util.Optional;
 public class Main extends Application {
     private static List<Player> players;
     public static final Logger log = LoggerFactory.getLogger(DiceGameLayoutController.class);
+    static Stage mainStage;
 
     @Override
     public void start(Stage stage) {
        try{
            initialiseGame();
+           mainStage = stage;
            startGame(stage);
        } catch (Exception e) {
            log.error("Problems occurred during program initialisation");
@@ -53,10 +55,11 @@ public class Main extends Application {
         Optional<ButtonType> click = result.showAndWait();
         try {
             if (click.isPresent() && click.get() == ButtonType.OK){
-                startGame(new Stage());
-                for(Player p : players){
-                    p.getResult().clear();
-                }
+                restartGame(mainStage);
+//                startGame(new Stage());
+//                for(Player p : players){
+//                    p.getResult().clear();
+//                }
             }
             else Platform.exit();
         }catch (Exception e) {
@@ -77,5 +80,12 @@ public class Main extends Application {
         stage.setTitle("Dice game");
         stage.setScene(new Scene(root, 1000, 700));
         stage.show();
+    }
+    public static void restartGame(Stage stage) throws Exception{
+        stage.close();
+        for(Player p : players){
+            p.getResult().clear();
+        }
+        startGame(stage);
     }
 }
