@@ -1,5 +1,7 @@
 package pl.RadoslawGdynia.DiceGame.Player;
 
+import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceEvaluation;
+
 import java.util.List;
 
 public class HumanPlayer extends Player {
@@ -10,7 +12,8 @@ public class HumanPlayer extends Player {
         if(list.isEmpty()) return;
         for(Integer index : list){
             int replacement = super.throwDice();
-            this.getResult().set(index, replacement);
+            this.getPlayerDice().set(index, replacement);
         }
+        this.setFigure(DiceEvaluation.evaluate(this.getPlayerDice()));
     }
 }

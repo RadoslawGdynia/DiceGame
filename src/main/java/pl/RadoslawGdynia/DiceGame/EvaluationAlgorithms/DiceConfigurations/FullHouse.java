@@ -9,9 +9,6 @@ public class FullHouse implements Configuration {
         this.finalValue = BASE_VALUE+3*firstModifier+2*secondModifier;
     }
 
-    public FullHouse() {
-    }
-
     @Override
     public int setRank() {
         return finalValue;

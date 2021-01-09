@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import pl.RadoslawGdynia.DiceGame.Main.Main;
+import pl.RadoslawGdynia.DiceGame.Model.DiceGameModel;
 import pl.RadoslawGdynia.DiceGame.Player.ComputerPlayer;
 import pl.RadoslawGdynia.DiceGame.Player.HumanPlayer;
 import pl.RadoslawGdynia.DiceGame.Player.Player;
@@ -76,7 +76,7 @@ public class StartGameController {
             Player player2 = new HumanPlayer(player2Name.getText());
             players.add(player2);
         }
-        Main.setPlayers(players);
+        DiceGameModel.setPlayers(players);
         Stage stage = (Stage) startButton.getScene().getWindow();
         stage.close();
     }

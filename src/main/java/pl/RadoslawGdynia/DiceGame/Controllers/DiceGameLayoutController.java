@@ -1,5 +1,6 @@
 package pl.RadoslawGdynia.DiceGame.Controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -9,15 +10,17 @@ import org.slf4j.LoggerFactory;
 import pl.RadoslawGdynia.DiceGame.DiceTile.DiceTile;
 import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceEvaluation;
 import pl.RadoslawGdynia.DiceGame.Main.Main;
-import pl.RadoslawGdynia.DiceGame.Player.ComputerPlayer;
+import pl.RadoslawGdynia.DiceGame.Model.DiceGameModel;
 import pl.RadoslawGdynia.DiceGame.Player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DiceGameLayoutController {
+public class DiceGameLayoutController implements GameController {
+
     public static final Logger log = LoggerFactory.getLogger(DiceGameLayoutController.class);
+    private final DiceGameModel model = new DiceGameModel(this);
     @FXML
     private Label p1CommandLabel;
     @FXML
@@ -59,9 +62,6 @@ public class DiceGameLayoutController {
     @FXML
     CheckBox p2CheckBox5;
 
-
-    private int round = 0;
-    private Player activePlayer;
     private Label activeResultLabel;
     private Label activeCommandLabel;
     private Button activeButton;
@@ -70,12 +70,8 @@ public class DiceGameLayoutController {
     private final List<CheckBox> p2CheckBoxes = new ArrayList<>();
     private List<CheckBox> activeCheckBoxes;
 
-    private final Player player1 = Main.getPlayers().get(0);
-    private final Player player2 = Main.getPlayers().get(1);
-
     public void initialize() {
-        p1Label.setText(player1.getPLAYER_NAME());
-        p2Label.setText(player2.getPLAYER_NAME());
+        setNameLabels();
         p1CheckBoxes.add(p1CheckBox1);
         p1CheckBoxes.add(p1CheckBox2);
         p1CheckBoxes.add(p1CheckBox3);
@@ -87,115 +83,89 @@ public class DiceGameLayoutController {
         p2CheckBoxes.add(p2CheckBox4);
         p2CheckBoxes.add(p2CheckBox5);
 
-        if (player2 instanceof ComputerPlayer) {
-            p2CommandLabel.setVisible(false);
+        if (model.computerIsOpponent()) {
             p2Button.setVisible(false);
+            p2CommandLabel.setVisible(false);
         }
         activeButton = p1Button;
         p2Button.setDisable(true);
-        activePlayer = player1;
         activeResultLabel = p1ResultLabel;
         activeCommandLabel = p1CommandLabel;
         activeCheckBoxes = p1CheckBoxes;
         activePane = p1DicePane;
     }
 
+    private void setNameLabels(){
+        String[] names = model.providePlayersNames();
+        p1Label.setText(names[0]);
+        p2Label.setText(names[1]);
+    }
+
     public void handlePlayButton() {
-
-        if (round < 2) {
-            firstRound();
-            if (player2 instanceof ComputerPlayer)  {
-                round++;
-                firstRound();
-            }
-        } else {
-            List<Integer> list = getDicesToReRoll(activeCheckBoxes);
-            if (list.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setHeaderText("You decided not to re-roll any dices.");
-                alert.setContentText("If you want to proceed press OK,\n if you would like to select dices to re-roll press CANCEL");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == ButtonType.OK) {
-                    activePlayer.decision(list);
-                } else {
-                    return;
-                }
-            } else {
-                activePlayer.decision(list);
-                generateDices(activePlayer.getResult());
-                configureResultLabel();
-            }
-            changeActivePlayer();
-            if(activePlayer instanceof ComputerPlayer) {
-                activePlayer.decision(list);
-                generateDices(activePlayer.getResult());
-                configureResultLabel();
-                changeActivePlayer();
-                round++;
-            }
-
-        }
-        round++;
-        if (round==4) {
-            Main.finalResults();
-        }
+        List<Integer> diceToReRoll = getDiceToReRoll(activeCheckBoxes);
+        model.playButtonLogic(diceToReRoll);
     }
 
-    private void firstRound() {
-        activePlayer.initialThrow();
-        generateDices(activePlayer.getResult());
-        configureResultLabel();
-        changeActivePlayer();
-    }
-
-    private void generateDices(List<Integer> results) {
-        activePane.getChildren().clear();
-        for (Integer dice : results) {
-            new DiceTile(activePane, dice);
-        }
-    }
-
-    private void changeActivePlayer() {
-        activePlayer = (activePlayer == player1) ? player2 : player1;
-        changeActiveSection();
-    }
-
-    private void changeActiveSection() {
-        activeButton.setDisable(true);
-        activePane = (activePlayer == player1) ? p1DicePane : p2DicePane;
-        activeCommandLabel.setText("Please wait for the opponent to make a move");
-        activeButton = (activePlayer == player1) ? p1Button : p2Button;
-        activeButton.setDisable(false);
-        activeResultLabel = (activePlayer == player1) ? p1ResultLabel : p2ResultLabel;
-        activeCommandLabel = (activePlayer == player1) ? p1CommandLabel : p2CommandLabel;
-        activeCommandLabel.setText("Its your turn to play");
-        checkBoxesAreActive(activeCheckBoxes, false);
-        activeCheckBoxes = (activePlayer == player1) ? p1CheckBoxes : p2CheckBoxes;
-        checkBoxesAreActive(activeCheckBoxes, true);
-    }
-
-    private void checkBoxesAreActive(List<CheckBox> list, boolean state) {
-        try {
-            for (CheckBox chB : list) {
-                chB.setDisable(!state);
-            }
-        } catch (NullPointerException e) {
-            log.error("List of checkboxes provided to change their state is null");
-        }
-    }
-
-    private List<Integer> getDicesToReRoll(List<CheckBox> list) {
+    private List<Integer> getDiceToReRoll(List<CheckBox> list) {
         List<Integer> indexesToReRoll = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isSelected()) indexesToReRoll.add(i);
         }
         return indexesToReRoll;
     }
-
-    private void configureResultLabel() {
-        activePlayer.setFigure(DiceEvaluation.evaluate(activePlayer.getResult()));
-        activeResultLabel.setText("RESULTS:\t\tFigure you have: " + activePlayer.getFigure().returnName() + ";\t which gives you points: " + activePlayer.getRank());
+    public void implementRoundChanges(Player activePlayer){
+        generateDice(activePlayer.getPlayerDice());
+        configureResultLabel(activePlayer);
+        changeActiveSection();
     }
 
+    public void generateDice(List<Integer> results) {
+        activePane.getChildren().clear();
+        for (Integer dice : results) {
+            new DiceTile(activePane, dice);
+        }
+    }
+    private void changeActiveSection() {
+        activeButton.setDisable(true);
+        activePane = (activePane == p2DicePane) ? p1DicePane : p2DicePane;
+        activeCommandLabel.setText("Please wait for the opponent to make a move");
+        activeButton = (activeButton == p2Button) ? p1Button : p2Button;
+        activeButton.setDisable(false);
+        activeResultLabel = (activeResultLabel == p2ResultLabel) ? p1ResultLabel : p2ResultLabel;
+        activeCommandLabel = (activeCommandLabel == p2CommandLabel) ? p1CommandLabel : p2CommandLabel;
+        activeCommandLabel.setText("Its your turn to play");
+        checkBoxesAreActive(activeCheckBoxes, false);
+        activeCheckBoxes = (activeCheckBoxes == p2CheckBoxes) ? p1CheckBoxes : p2CheckBoxes;
+        checkBoxesAreActive(activeCheckBoxes, true);
+    }
 
+    private void checkBoxesAreActive(List<CheckBox> checkBoxes, boolean state) {
+        try {
+            for (CheckBox chB : checkBoxes) {
+                chB.setDisable(!state);
+            }
+        } catch (NullPointerException e) {
+            log.error("List of checkboxes provided to change their state is null");
+        }
+    }
+    public void configureResultLabel(Player activePlayer) {
+        activeResultLabel.setText("RESULTS:\t\tFigure you have: " + activePlayer.getFigure().returnName() + ";\t which gives you points: " + activePlayer.getRank());
+    }
+    public void showFinalResults(){
+        Alert result = new Alert(Alert.AlertType.INFORMATION);
+        result.setTitle("WE HAVE A WINNER!");
+        result.setHeaderText("This game was won by: " + DiceEvaluation.finalResult() + "\n\t it was a great game!");
+        result.setContentText("Would you like to try again? \n If so - please click OK button :)");
+        result.getButtonTypes().add(ButtonType.FINISH);
+        Optional<ButtonType> playersChoice = result.showAndWait();
+        try {
+            if (playersChoice.isPresent() && playersChoice.get() == ButtonType.OK){
+                Main.restartGame();
+                model.clearPlayersScore();
+            }
+            else Platform.exit();
+        }catch (Exception e) {
+            log.error("ups...");
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package pl.RadoslawGdynia.DiceGame.Player;
 
 import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceConfigurations.Configuration;
+import pl.RadoslawGdynia.DiceGame.EvaluationAlgorithms.DiceEvaluation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,13 +9,13 @@ import java.util.Random;
 
 public abstract class Player {
     public final String PLAYER_NAME;
-    private final List<Integer> result;
+    private final List<Integer> playerDice;
     private int rank;
     private Configuration figure;
 
     public Player(String name) {
         this.PLAYER_NAME = name;
-        this.result = new ArrayList<>();
+        this.playerDice = new ArrayList<>();
         this.rank = 0;
         this.figure = null;
     }
@@ -23,8 +24,8 @@ public abstract class Player {
         return PLAYER_NAME;
     }
 
-    public List<Integer> getResult() {
-        return result;
+    public List<Integer> getPlayerDice() {
+        return playerDice;
     }
 
     public int getRank() {
@@ -45,8 +46,9 @@ public abstract class Player {
     }
     public void initialThrow(){
         for(int i =0; i<5; i++){
-            result.add(throwDice());
+            playerDice.add(throwDice());
         }
+        this.setFigure(DiceEvaluation.evaluate(playerDice));
     }
     public int throwDice(){
         Random random = new Random();
