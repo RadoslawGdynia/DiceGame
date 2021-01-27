@@ -6,7 +6,8 @@ public class Yahtzee implements Configuration {
     private final int finalValue;
 
     public Yahtzee(int modifier) {
-        this.finalValue = BASE_VALUE+5*modifier;
+        if (ValueCheck.isInCorrectRange(modifier))  this.finalValue = BASE_VALUE+5*modifier;
+        else throw new IllegalArgumentException("Dice can have values of 1-6");
     }
 
     @Override

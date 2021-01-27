@@ -6,7 +6,8 @@ public class TwoPairs implements Configuration {
     private final int finalValue;
 
     public TwoPairs(int firstModifier, int secondModifier) {
-        this.finalValue = BASE_VALUE+firstModifier+secondModifier;
+        if (ValueCheck.isInCorrectRange(firstModifier, secondModifier))  this.finalValue = BASE_VALUE+firstModifier+secondModifier;
+        else throw new IllegalArgumentException("Dice can have values of 1-6");
     }
 
     @Override

@@ -1,5 +1,9 @@
 package Controllers;
 
+import Controllers.DiceTile.DiceTile;
+import Main.Main;
+import Model.DiceGameModel;
+import Model.Players.Player;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -7,11 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import Controllers.DiceTile.DiceTile;
-import Model.DiceLogic.EvaluationAlgorithm.DiceEvaluation;
-import Main.Main;
-import Model.DiceGameModel;
-import Model.Players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +175,7 @@ public class DiceGameController implements GameController {
     public void showFinalResults(){
         Alert result = new Alert(Alert.AlertType.INFORMATION);
         result.setTitle("WE HAVE A WINNER!");
-        result.setHeaderText("This game was won by: " + DiceEvaluation.finalResult() + "\n\tit was a great game!");
+        result.setHeaderText("This game was won by: " + model.provideWinnerName() + "\n\tit was a great game!");
         result.setContentText("Would you like to try again? \nIf so - please click OK button :)");
         result.getButtonTypes().add(ButtonType.FINISH);
         Optional<ButtonType> playersChoice = result.showAndWait();

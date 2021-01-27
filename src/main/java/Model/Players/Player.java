@@ -1,7 +1,7 @@
 package Model.Players;
 
 import Model.DiceLogic.DiceConfigurations.Configuration;
-import Model.DiceLogic.EvaluationAlgorithm.DiceEvaluation;
+import Model.DiceLogic.Evaluations.DiceEvaluation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,8 @@ public class FullHouse implements Configuration {
     private final int finalValue;
 
     public FullHouse(int firstModifier, int secondModifier) {
-        this.finalValue = BASE_VALUE+3*firstModifier+2*secondModifier;
+        if(ValueCheck.isInCorrectRange(firstModifier, secondModifier)) this.finalValue = BASE_VALUE+3*firstModifier+2*secondModifier;
+        else throw new IllegalArgumentException("Dice can have values of 1-6");
     }
 
     @Override

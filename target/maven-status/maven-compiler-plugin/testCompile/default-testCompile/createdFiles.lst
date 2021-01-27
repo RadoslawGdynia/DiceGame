@@ -1,1 +1,11 @@
-pl\RadoslawGdynia\DiceGame\EvaluationAlgorithms\DiceConfigurations\DiceEvaluationTest.class
+Model\DiceLogic\DiceConfigurations\TwoPairsTest.class
+Model\DiceLogic\DiceConfigurations\LargeStraightTest.class
+Model\DiceLogic\DiceConfigurations\ValueCheckTest.class
+Model\DiceLogic\Evaluations\DiceEvaluationTest.class
+Model\DiceLogic\DiceConfigurations\PairTest.class
+Model\DiceLogic\DiceConfigurations\SmallStraightTest.class
+Model\DiceLogic\DiceConfigurations\YahtzeeTest.class
+Model\DiceLogic\DiceConfigurations\QuadrupleTest.class
+Model\DiceLogic\DiceConfigurations\TripleTest.class
+Model\DiceLogic\DiceConfigurations\FullHouseTest.class
+Model\DiceLogic\Evaluations\ResultsTest.class

@@ -6,7 +6,8 @@ public class Triple implements Configuration {
     private final int finalValue;
 
     public Triple(int modifier) {
-        this.finalValue = BASE_VALUE+modifier;
+        if (ValueCheck.isInCorrectRange(modifier))  this.finalValue = BASE_VALUE+modifier;
+        else throw new IllegalArgumentException("Dice can have values of 1-6");
     }
 
     @Override

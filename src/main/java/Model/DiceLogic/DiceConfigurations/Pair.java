@@ -6,7 +6,8 @@ public class Pair implements Configuration {
     private final int finalValue;
 
     public Pair(int modifier) {
-        this.finalValue = BASE_VALUE+modifier;
+        if (ValueCheck.isInCorrectRange(modifier))  this.finalValue = BASE_VALUE+modifier;
+        else throw new IllegalArgumentException("Dice can have values of 1-6");
     }
 
     @Override

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartGameController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StartGameController">
    <children>
       <Button layoutX="71.0" layoutY="62.0" mnemonicParsing="false" onAction="#handlePlayComputerButton" prefHeight="65.0" prefWidth="200.0" text="Play with Computer" AnchorPane.leftAnchor="50.0" />
       <Button layoutX="317.0" layoutY="62.0" mnemonicParsing="false" onAction="#handlePlayFriendButton" prefHeight="65.0" prefWidth="200.0" text="Play with a Friend" AnchorPane.rightAnchor="50.0" />

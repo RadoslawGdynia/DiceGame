@@ -6,7 +6,8 @@ public class Quadruple implements Configuration {
     private final int finalValue;
 
     public Quadruple(int modifier) {
-        this.finalValue = BASE_VALUE+4*modifier;
+        if (ValueCheck.isInCorrectRange(modifier))  this.finalValue = BASE_VALUE+4*modifier;
+        else throw new IllegalArgumentException("Dice can have values of 1-6");
     }
 
     @Override

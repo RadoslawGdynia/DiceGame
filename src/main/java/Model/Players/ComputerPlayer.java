@@ -1,6 +1,6 @@
 package Model.Players;
 
-import Model.DiceLogic.EvaluationAlgorithm.DiceEvaluation;
+import Model.DiceLogic.Evaluations.DiceEvaluation;
 import Model.DiceGameModel;
 
 import java.util.ArrayList;
