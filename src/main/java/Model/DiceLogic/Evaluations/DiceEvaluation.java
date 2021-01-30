@@ -60,7 +60,7 @@ public class DiceEvaluation {
 
     private static Configuration smallOrLargeStraightOrNothing(List<Integer> resultData, int firstModifier) {
         //Large straight means that 5 dice are in order, which means that either there is no 1 or 6 in results
-        if (resultData.get(0) == 0 || resultData.get(4) == 0) {
+        if (resultData.get(0) == 0 || resultData.get(5) == 0) {
             return new LargeStraight(firstModifier);
         //Small straight means that 4 dice are in order, which means that dice with 3 and 4 are necessary for it to exist.
             // If there is no 3 nor 4 it means that player does not have any figure:

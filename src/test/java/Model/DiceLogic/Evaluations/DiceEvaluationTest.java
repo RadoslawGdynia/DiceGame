@@ -124,7 +124,7 @@ class DiceEvaluationTest {
         Configuration figureCalculated = DiceEvaluation.evaluate(initialDiceResults);
 
         //then
-        assertEquals(Yahtzee.class, figureCalculated.getClass());
+        assertEquals(Pair.class, figureCalculated.getClass());
 
     }
     @Test
